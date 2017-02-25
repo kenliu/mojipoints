@@ -73,6 +73,15 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # TODO eventually we want to silence logging of events but while we
+  # are in beta we'll just filter the text from messages in filter_parameter_logging.rb
+  # when we do this we'll want to make it configurable via env var
+  # require 'silencer/logger'
+  #
+  # Rails.application.configure do
+  #   config.middleware.swap Rails::Rack::Logger, Silencer::Logger, :silence => ["/events"]
+  # end
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end

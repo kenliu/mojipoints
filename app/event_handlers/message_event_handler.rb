@@ -1,14 +1,11 @@
 class MessageEventHandler < BaseEventHandler
   def handle(params)
-    #TODO figure out how to disable request logging in production
-    ap params
     # Don't process messages sent from our bot user
     user_id = params[:event][:user]
     return if bot_user?(user_id)
 
     message = params[:event][:text]
     message = params[:event][:message][:text] unless message # message events can come in with two different structures
-    Rails.logger.debug('received message: ' + message)
 
     recognition_command = Commands::RecognitionCommand.new(params)
     source_channel = params[:event][:channel]
@@ -38,7 +35,7 @@ class MessageEventHandler < BaseEventHandler
         text: Commands::WelcomeMessage.new(bot_user: bot_user).response(params: params)[:text]
       )
     elsif Commands::ScoreCommand.new(bot_user: bot_user).match(channel: source_channel, message: message)
-      #TODO this is ugly
+      # FIXME this is ugly
       command = Commands::ScoreCommand.new(bot_user: bot_user)
       command.match(channel: source_channel, message: message)
       slack_api.chat_postMessage(
@@ -47,11 +44,5 @@ class MessageEventHandler < BaseEventHandler
         text: command.response(params: params)[:text]
       )
     end
-  end
-
-  private
-
-  def recognition_subject?(subject)
-    Recognition.find_by(subject: subject) != nil
   end
 end

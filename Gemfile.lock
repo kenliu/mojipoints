@@ -151,6 +151,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    silencer (1.0.0)
     slack-ruby-client (0.7.8)
       activesupport
       faraday (>= 0.9)
@@ -198,6 +199,7 @@ DEPENDENCIES
   rollbar
   rspec-rails
   rubocop
+  silencer (~> 1.0)
   slack-ruby-client
   spring
   spring-watcher-listen (~> 2.0.0)
