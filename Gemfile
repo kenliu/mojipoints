@@ -13,9 +13,9 @@ gem 'configatron'
 gem 'keen'
 gem 'puma', '~> 3.0'
 gem 'rollbar'
+gem 'scout_apm'
 gem 'silencer', '~> 1.0'
 gem 'slack-ruby-client'
-
 
 group :development, :test do
   gem 'awesome_print'

@@ -151,6 +151,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    scout_apm (2.1.22)
     silencer (1.0.0)
     slack-ruby-client (0.7.8)
       activesupport
@@ -199,12 +200,16 @@ DEPENDENCIES
   rollbar
   rspec-rails
   rubocop
+  scout_apm
   silencer (~> 1.0)
   slack-ruby-client
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
   tzinfo-data
+
+RUBY VERSION
+   ruby 2.3.3p222
 
 BUNDLED WITH
    1.14.3
