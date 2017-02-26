@@ -86,6 +86,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     parser (2.3.3.1)
       ast (~> 2.2)
+    pg (0.18.4)
     powerpack (0.1.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -194,6 +195,7 @@ DEPENDENCIES
   dotenv-rails
   keen
   listen (~> 3.0.5)
+  pg
   pry-rails
   puma (~> 3.0)
   rails (~> 5.0.1)
