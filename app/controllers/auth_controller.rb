@@ -1,3 +1,4 @@
+# code is heavily borrowed from https://github.com/slackapi/Slack-Ruby-Onboarding-Tutorial/blob/master/auth.rb
 class AuthController < ApplicationController
 
   BOT_SCOPE = 'bot'
@@ -9,11 +10,11 @@ class AuthController < ApplicationController
     slack_verification_token: ENV['SLACK_VERIFICATION_TOKEN']
   }.freeze
 
-  def begin_auth
+  def begin
     render html: add_to_slack_button
   end
 
-  def finish_auth
+  def finish
     client = Slack::Web::Client.new
     # OAuth Step 3: Success or failure
     begin

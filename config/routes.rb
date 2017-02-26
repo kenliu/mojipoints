@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/begin_auth', to: 'auth#begin_auth'
-  get '/finish_auth', to: 'auth#finish_auth'
+  get '/auth/begin', to: 'auth#begin'
+  get '/auth/finish', to: 'auth#finish'
   post '/events', to: 'events#new'
 end
