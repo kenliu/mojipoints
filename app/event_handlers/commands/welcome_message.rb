@@ -13,7 +13,7 @@ module Commands
     private
 
     def help_string
-      bot_name = '@upvotebot'
+      bot_name = '@mojipoints'
 """\`#{bot_name} help\` : show this message
 \`@user++\` : upvote a user
 \`@user--\` : downvote a user
