@@ -5,7 +5,7 @@ class CreateRecognitions < ActiveRecord::Migration[5.0]
       t.string :subject
       t.string :text
       t.string :ts # the timestamp of the original recognition post
-      t.string :slack_user_id # the slack user id of the person being recognized
+      t.integer :slack_user_id # the slack user id of the person being recognized
       t.timestamps
     end
   end
