@@ -5,7 +5,7 @@ class AddDbConstraints < ActiveRecord::Migration[5.0]
     change_column_null :recognitions, :ts, false
     change_column_null :recognitions, :channel, false
     add_foreign_key :recognitions, :slack_users
-    add_index :recognitions, :slack_users
+    add_index :recognitions, :slack_user_id
     add_index :recognitions, :subject
     add_index :recognitions, :text
 
@@ -24,6 +24,6 @@ class AddDbConstraints < ActiveRecord::Migration[5.0]
     change_column_null :votes, :first_vote, false
     change_column_default :votes, :first_vote, from: nil, to: true
     add_foreign_key :votes, :recognitions
-    add_index :votes, :recognitions
+    add_index :votes, :recognition_id
   end
 end
