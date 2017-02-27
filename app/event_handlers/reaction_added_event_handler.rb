@@ -8,11 +8,10 @@ class ReactionAddedEventHandler < BaseEventHandler
     voterid = user_id
     emoji = params[:event][:reaction]
 
-    # here we look for the bot message ts instead of the ts of the original recognition
-    recognition = Recognition.find_by(bot_msg_ts: msg) # case where reaction was on the upvote bot message
-    #      recognition = Recognition.find_by(ts: msg) unless recognition # case where reaction was on the original recognition message
+    recognition = Recognition.find_by(bot_msg_ts: msg) || # case where reaction was on the bot message
+                  Recognition.find_by(ts: msg) # case where reaction was on the original recognition message
     unless recognition
-      Rails.logger.error 'recognition not found'
+      Rails.logger.debug "recognition for message: #{msg} not found"
       return
     end
 
@@ -26,7 +25,7 @@ class ReactionAddedEventHandler < BaseEventHandler
       attachment = ScoreMessageFormatter.format_slack_message(recognition)
 
       slack_api.chat_update(
-        ts: msg,
+        ts: recognition.bot_msg_ts,
         as_user: 'true',
         channel: channel,
         attachments: [attachment]
