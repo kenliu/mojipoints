@@ -4,20 +4,28 @@ RSpec.describe Commands::RecognitionCommand do
 
   let(:team_id) { 'team123' }
   subject { described_class.new(team_id: team_id) }
+  let(:vote_strings) { %w(++ :thumbsup: :heavy_plus_sign: :thumbsdown: :heavy_minus_sign:) }
 
   describe '#match' do
     context 'valid upvotes and downvotes' do
-      it 'upvotes with no reason' do
-        text = '<@U44BY21U4> ++'
-        expect(subject.match(message: text)).to be_truthy
-        expect(subject.vote_string).to eq('++')
-        expect(subject.subject).to eq('<@U44BY21U4>')
+
+      # TODO figure out how to make this loop create different examples
+      it 'votes with with no reason' do
+        vote_strings.each do |votestring|
+          text = "<@U44BY21U4> #{votestring}"
+          expect(subject.match(message: text)).to be_truthy
+          expect(subject.vote_string).to eq(votestring)
+          expect(subject.subject).to eq('<@U44BY21U4>')
+        end
       end
 
-      it 'upvotes with reason' do
-        text = '<@U44BY21U4> ++ for something'
-        subject.match(message: text)
-        expect(subject.vote_string).to eq('++')
+      it 'votes with reason' do
+        vote_strings.each do |votestring|
+          text = "<@U44BY21U4> #{votestring} for something"
+          expect(subject.match(message: text)).to be_truthy
+          expect(subject.vote_string).to eq(votestring)
+          expect(subject.subject).to eq('<@U44BY21U4>')
+        end
       end
 
       it 'upvotes a thing with no reason' do

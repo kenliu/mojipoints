@@ -2,12 +2,15 @@ module Commands
   class RecognitionCommand
     attr_reader :subject, :vote_string, :reason, :team_id
 
+    # TODO DRY the vote strings with the recognition service class
+    EMOJI_STRINGS = %w(:thumbsup: :heavy_plus_sign: :thumbsdown: :heavy_minus_sign:).freeze
+
     def initialize(params)
       @team_id = params[:team_id]
     end
 
     def match(message:)
-      match_data = /^([\s\w'@.:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0<>]*)\s*(\+{2,}|-{2,})( for (.+$))?/.match(message)
+      match_data = /^([\s\w'@.:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0<>]*)\s*(\+{2,}|-{2,}|#{EMOJI_STRINGS.join('|')})( for (.+$))?/.match(message)
       if match_data
         @subject = match_data[1].strip if match_data[1]
         @vote_string = match_data[2]

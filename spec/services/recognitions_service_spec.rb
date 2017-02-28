@@ -7,6 +7,11 @@ RSpec.describe RecognitionsService do
       expect(recognition.votes.first.point).to eq(-1)
     end
 
+    it 'creates a recognition for a downvote with emoji' do
+      recognition = described_class.create_recognition('abc123', 'C123456', 'someone', ':thumbsdown:', 'for doing something', 'voter', '123456.123456', true)
+      expect(recognition.votes.first.point).to eq(-1)
+    end
+
     it 'creates a recognition for an upvote' do
       recognition = described_class.create_recognition('abc123', 'C123456', 'someone', '++', 'for doing something', 'voter', '123456.123456', true)
       expect(recognition.votes.first.point).to eq(1)
