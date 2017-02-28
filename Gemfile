@@ -12,6 +12,7 @@ gem 'rails', '~> 5.0.1'
 gem 'configatron'
 gem 'keen'
 gem 'puma', '~> 3.0'
+gem 'pg'
 gem 'rollbar'
 gem 'scout_apm'
 gem 'silencer', '~> 1.0'
@@ -35,10 +36,6 @@ end
 
 group :test do
   gem 'rspec-rails'
-end
-
-group :production do
-  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
