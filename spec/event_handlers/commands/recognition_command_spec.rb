@@ -59,7 +59,7 @@ RSpec.describe Commands::RecognitionCommand do
       params = {
         event: {
           channel: 'channel',
-          user: 'user',
+          user: 'U123456',
           ts: '123456.123456'
         }
       }
@@ -68,7 +68,7 @@ RSpec.describe Commands::RecognitionCommand do
           {
             fallback: "foo has 1 points",
             title: "foo has 1 points",
-            footer: ":thumbsup: by <@user>"
+            footer: ":thumbsup: by <@U123456>"
           }
         ],
         channel: 'channel'
