@@ -10,33 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219154321) do
+ActiveRecord::Schema.define(version: 20170226042828) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "recognitions", force: :cascade do |t|
     t.string   "teamid"
-    t.string   "subject"
+    t.string   "subject",                       null: false
     t.string   "text"
-    t.string   "ts"
-    t.string   "slack_user_id"
+    t.string   "ts",                            null: false
+    t.integer  "slack_user_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "bot_msg_ts"
-    t.string   "channel"
+    t.string   "channel",                       null: false
     t.boolean  "vote_direction", default: true, null: false
+    t.index ["slack_user_id"], name: "index_recognitions_on_slack_user_id", using: :btree
+    t.index ["subject"], name: "index_recognitions_on_subject", using: :btree
+    t.index ["text"], name: "index_recognitions_on_text", using: :btree
   end
 
   create_table "slack_teams", force: :cascade do |t|
-    t.string   "teamid"
-    t.string   "oauth_access_token"
-    t.string   "bot_userid"
-    t.string   "bot_oauth_access_token"
+    t.string   "teamid",                 null: false
+    t.string   "oauth_access_token",     null: false
+    t.string   "bot_userid",             null: false
+    t.string   "bot_oauth_access_token", null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   create_table "slack_users", force: :cascade do |t|
     t.string   "teamid"
-    t.string   "slack_userid"
+    t.string   "slack_userid", null: false
     t.string   "slack_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -44,13 +50,16 @@ ActiveRecord::Schema.define(version: 20170219154321) do
 
   create_table "votes", force: :cascade do |t|
     t.string   "teamid"
-    t.integer  "recognition_id"
-    t.integer  "slack_user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "recognition_id",                null: false
+    t.integer  "slack_user_id",                 null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "emoji"
-    t.boolean  "first_vote"
-    t.integer  "point",          default: 1, null: false
+    t.boolean  "first_vote",     default: true, null: false
+    t.integer  "point",          default: 1,    null: false
+    t.index ["recognition_id"], name: "index_votes_on_recognition_id", using: :btree
   end
 
+  add_foreign_key "recognitions", "slack_users"
+  add_foreign_key "votes", "recognitions"
 end
