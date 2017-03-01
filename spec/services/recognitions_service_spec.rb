@@ -27,12 +27,17 @@ RSpec.describe RecognitionsService do
   context '#vote' do
 
     let(:recognition) do
-      described_class.create_recognition('abc123', 'C123456', 'someone', '--', 'for doing something', 'voter', '123456.123456', true)
+      described_class.create_recognition('abc123', 'C123456', 'someone', '++', 'for doing something', 'voter', '123456.123456', true)
     end
 
     it 'adds an upvote' do
       described_class.vote('abc123', recognition, 'voter', '+1')
       expect(recognition.votes.length).to eq 2
+    end
+
+    it 'changes the direction of the vote' do
+      described_class.vote('abc123', recognition, 'voter', '+1', false, true)
+      expect(recognition.votes.last.point).to eq -1
     end
   end
 end

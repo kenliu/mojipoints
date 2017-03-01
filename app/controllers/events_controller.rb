@@ -11,6 +11,8 @@ class EventsController < ApplicationController
         MessageEventHandler.new(params).handle(params)
       when 'reaction_added'
         ReactionAddedEventHandler.new(params).handle(params)
+      when 'reaction_removed'
+        ReactionRemovedEventHandler.new(params).handle(params)
     end
   end
 

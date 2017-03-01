@@ -9,8 +9,9 @@ class RecognitionsService
     recognition
   end
 
-  def self.vote(teamid, recognition, voterid, emoji, first_vote = false)
-    point = recognition.vote_direction ? Vote::UP : Vote::DOWN
+  def self.vote(teamid, recognition, voterid, emoji, first_vote = false, flip_vote_direction = false)
+    direction = recognition.vote_direction ^ flip_vote_direction
+    point = direction ? Vote::UP : Vote::DOWN
     voter = SlackUser.find_or_create_by(teamid: teamid, slack_userid: voterid)
     recognition.votes << Vote.new(teamid: teamid, slack_user: voter, emoji: emoji, point: point, first_vote: first_vote)
     recognition.save!
