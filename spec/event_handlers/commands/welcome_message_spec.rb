@@ -16,7 +16,7 @@ RSpec.describe Commands::WelcomeMessage do
   describe '#response' do
     it 'responds' do
       params = nil
-      expect(subject.response(params: params)[:text]).to start_with("happy to help!")
+      expect(subject.response(params: params)[:text]).to start_with("Hi there, happy to help you out!")
     end
   end
 end
