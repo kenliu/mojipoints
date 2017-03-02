@@ -6,7 +6,7 @@ module Commands
     end
 
     def response(params:)
-      response = "happy to help!\n" + help_string
+      response = "Hi there, happy to help you out!\n" + help_string
       { text: response }
     end
 
@@ -14,13 +14,26 @@ module Commands
 
     def help_string
       bot_name = '@mojipoints'
-"""\`#{bot_name} help\` : show this message
-\`@user++\` : upvote a user
-\`@user--\` : downvote a user
+
+"""
+*Getting help*
+\`#{bot_name} help\` : show this message
+
+*How to upvote*
+\`@user++\` or \`@user`:thumbsup: or \`@user`:heavy_plus_sign: : upvote a user
 \`@user++ for something\` : upvote a user with a reason
+\`thing++` : upvote a thing
+Add a reaction to keep voting up!
+
+*How to downvote*
+\`@user--\` or \`@user`:thumbsdown: or \`@user`:heavy_minus_sign: : downvote a user
 \`@user-- for something\` : downvote a user with a reason
-\`#{bot_name} score @user\` : show the score for a user
+\`thing--` : downvote a thing
+Add a reaction to keep voting down!
+
+*Showing scores*
 \`#{bot_name} top\` : show the leaderboard
+\`#{bot_name} score @user\` : show the score for a user
 """
     end
   end
