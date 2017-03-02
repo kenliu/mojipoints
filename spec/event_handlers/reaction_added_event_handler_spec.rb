@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ReactionAddedEventHandler do
-  let(:teamid) { 't123456' }
+  let(:teamid) { 'T123456' }
   let(:bot_userid) { 'UBOT12345' }
   let!(:slack_team) { SlackTeam.create(teamid: teamid, bot_userid: bot_userid, bot_oauth_access_token: '123', oauth_access_token: '123')}
   let(:initialize_params) { { team_id: teamid, user: bot_userid } }

@@ -3,6 +3,7 @@ class MessageEventHandler < BaseEventHandler
     # Don't process messages sent from our bot user
     user_id = params[:event][:user]
     return if bot_user?(user_id)
+    return if params[:event][:subtype] # don't handle anything besides a normal message
 
     message = params[:event][:text]
     message = params[:event][:message][:text] unless message # message events can come in with two different structures
@@ -41,6 +42,7 @@ class MessageEventHandler < BaseEventHandler
       slack_api.chat_postMessage(
         as_user: 'true',
         channel: source_channel,
+        # FIXME this blows up if there is no data in the DB
         text: command.response(params: params)[:text]
       )
     end
