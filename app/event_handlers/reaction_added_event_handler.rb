@@ -22,7 +22,7 @@ class ReactionAddedEventHandler < ReactionEventHandler
       # in the future we will chastise the user for self voting
       Rails.logger.info("#{voterid} tried to self-vote")
     else
-      post_recognition(channel, emoji, recognition, voterid, true, false)
+      post_recognition(channel, emoji, recognition, voterid, false, false)
     end
   end
 end
