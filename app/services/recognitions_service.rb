@@ -3,7 +3,7 @@ class RecognitionsService
     direction = vote_direction(vote_string)
     point = direction ? Vote::UP : Vote::DOWN
     recognition = Recognition.create!(teamid: teamid, channel: channel, text: reason, subject: subject, ts: ts, vote_direction: direction)
-    voter = SlackUser.find_or_create_by(teamid: teamid, slack_userid: voterid)
+    voter = SlackUser.find_or_create_by!(teamid: teamid, slack_userid: voterid)
     recognition.votes << Vote.new(teamid: teamid, slack_user: voter, point: point, first_vote: first_vote)
     recognition.save!
     recognition
@@ -12,7 +12,7 @@ class RecognitionsService
   def self.vote(teamid, recognition, voterid, emoji, first_vote = false, flip_vote_direction = false)
     direction = recognition.vote_direction ^ flip_vote_direction
     point = direction ? Vote::UP : Vote::DOWN
-    voter = SlackUser.find_or_create_by(teamid: teamid, slack_userid: voterid)
+    voter = SlackUser.find_or_create_by!(teamid: teamid, slack_userid: voterid)
     recognition.votes << Vote.new(teamid: teamid, slack_user: voter, emoji: emoji, point: point, first_vote: first_vote)
     recognition.save!
   end
