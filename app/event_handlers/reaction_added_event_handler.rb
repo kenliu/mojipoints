@@ -3,13 +3,13 @@ class ReactionAddedEventHandler < ReactionEventHandler
     user_id = params[:event][:user]
     return if bot_user?(user_id)
 
-    msg = params[:event][:item][:ts]
     channel = params[:event][:item][:channel]
     voterid = user_id
     emoji = params[:event][:reaction]
 
     msg = params[:event][:item][:ts]
 
+    return unless msg
     recognition = Recognition.find_by(bot_msg_ts: msg) || # case where reaction was on the bot message
                   Recognition.find_by(ts: msg) # case where reaction was on the original recognition message
     unless recognition

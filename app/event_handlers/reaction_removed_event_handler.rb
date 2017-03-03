@@ -7,6 +7,7 @@ class ReactionRemovedEventHandler < ReactionEventHandler
     emoji = params[:event][:reaction]
     voterid = user_id
 
+    return unless msg
     recognition = Recognition.find_by(bot_msg_ts: msg) || # case where reaction was on the bot message
                   Recognition.find_by(ts: msg) # case where reaction was on the original recognition message
 
