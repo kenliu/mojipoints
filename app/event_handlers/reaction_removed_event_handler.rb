@@ -1,4 +1,4 @@
-class ReactionRemovedEventHandler < BaseEventHandler
+class ReactionRemovedEventHandler < ReactionEventHandler
 
   def handle(params)
     user_id = params[:event][:user]
@@ -15,15 +15,6 @@ class ReactionRemovedEventHandler < BaseEventHandler
       return
     end
 
-    RecognitionsService.vote(team_id, recognition, voterid, emoji, false, true)
-
-    attachment = ScoreMessageFormatter.format_slack_message(recognition)
-
-    slack_api.chat_update(
-      ts: recognition.bot_msg_ts,
-      as_user: 'true',
-      channel: channel,
-      attachments: [attachment]
-    )
+    post_recognition(channel, emoji, recognition, voterid, false, true)
   end
 end
