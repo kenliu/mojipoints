@@ -10,7 +10,7 @@ module Commands
     end
 
     def match(message:)
-      match_data = /^([\s\w'@.:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0<>]*)\s*(\+{2,}|-{2,}|#{EMOJI_STRINGS.join('|')})( for (.+$))?/.match(message)
+      match_data = /^([\s\w'@.:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0<>]*)\s*(\+{2}|-{2}|#{EMOJI_STRINGS.join('|')})( for (.+$))?$/.match(message)
       if match_data
         @subject = match_data[1].strip if match_data[1]
         @vote_string = match_data[2]

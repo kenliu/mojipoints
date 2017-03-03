@@ -4,14 +4,13 @@ RSpec.describe Commands::RecognitionCommand do
 
   let(:team_id) { 'team123' }
   subject { described_class.new(team_id: team_id) }
-  let(:vote_strings) { %w(++ :thumbsup: :heavy_plus_sign: :thumbsdown: :heavy_minus_sign:) }
 
   describe '#match' do
     context 'valid upvotes and downvotes' do
+      vote_strings = %w(++ :thumbsup: :heavy_plus_sign: :thumbsdown: :heavy_minus_sign:)
 
-      # TODO figure out how to make this loop create different examples
-      it 'votes with with no reason' do
-        vote_strings.each do |votestring|
+      vote_strings.each do |votestring|
+        it "votes with with no reason using #{votestring}" do
           text = "<@U44BY21U4> #{votestring}"
           expect(subject.match(message: text)).to be_truthy
           expect(subject.vote_string).to eq(votestring)
@@ -19,8 +18,8 @@ RSpec.describe Commands::RecognitionCommand do
         end
       end
 
-      it 'votes with reason' do
-        vote_strings.each do |votestring|
+      vote_strings.each do |votestring|
+        it "votes with reason using #{votestring}" do
           text = "<@U44BY21U4> #{votestring} for something"
           expect(subject.match(message: text)).to be_truthy
           expect(subject.vote_string).to eq(votestring)
@@ -45,11 +44,17 @@ RSpec.describe Commands::RecognitionCommand do
     end
 
     context 'invalid upvotes and downvotes' do
-      specify '+-'
-      specify '---'
-      specify '+++'
-    end
+      specify 'when ++ is followed by text besides `for`' do
+        text = 'foo++ blah blah other stuff'
+        expect(subject.match(message: text)).to be_falsey
+      end
 
+      %w(foo+- foo--- foo+++).each do |text|
+        specify "when #{text}" do
+          expect(subject.match(message: text)).to be_falsey
+        end
+      end
+    end
   end
 
   describe '#response' do
@@ -95,9 +100,6 @@ RSpec.describe Commands::RecognitionCommand do
           }
         }
         expect(subject.response(message: nil, params: params)).to be_nil
-      end
-
-      it 'rejects self-upvotes for non-user subjects' do
       end
     end
   end
