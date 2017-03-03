@@ -1,4 +1,7 @@
 class PointsService
+
+  DEFAULT_TOP_RECOGNITIONS = 100
+
   def self.total_points(subject)
     Recognition.where(subject: subject).joins(:votes).sum('votes.point')
   end
@@ -8,10 +11,17 @@ class PointsService
   end
 
   def self.reasons_report(subject)
-    Recognition.where(subject: subject).joins(:votes).group('recognitions.text').order('sum_votes_point desc').sum('votes.point')
+    Recognition.where(subject: subject).joins(:votes)
+        .group('recognitions.text')
+        .order('sum_votes_point desc')
+        .sum('votes.point')
   end
 
-  def self.top_users_report
-    Recognition.joins(:votes).group('recognitions.subject').order('sum_votes_point desc').sum('votes.point')
+  def self.top_recognitions_report(limit = DEFAULT_TOP_RECOGNITIONS)
+    Recognition.joins(:votes)
+        .group('recognitions.subject')
+        .order('sum_votes_point desc')
+        .limit(limit)
+        .sum('votes.point')
   end
 end

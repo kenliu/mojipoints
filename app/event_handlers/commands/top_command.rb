@@ -7,7 +7,7 @@ module Commands
 
     def response(params:)
       {
-        text: PointsService.top_users_report.map { |subject, score| "#{score} points: #{subject}" }.join("\n")
+        text: PointsService.top_recognitions_report.map { |subject, score| "#{score} points: #{subject}" }.join("\n")
       }
     end
   end
