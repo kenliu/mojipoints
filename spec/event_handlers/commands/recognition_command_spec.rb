@@ -49,7 +49,7 @@ RSpec.describe Commands::RecognitionCommand do
         expect(subject.match(message: text)).to be_falsey
       end
 
-      %w(foo+- foo--- foo+++).each do |text|
+      %w(-- ++ foo+- foo--- foo+++).each do |text|
         specify "when #{text}" do
           expect(subject.match(message: text)).to be_falsey
         end
