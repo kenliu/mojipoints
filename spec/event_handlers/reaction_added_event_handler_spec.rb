@@ -14,15 +14,15 @@ RSpec.describe ReactionAddedEventHandler do
   let(:bot_msg_ts) { '123456.123456' }
   let(:params) do
     {
-        event: {
-            item: {
-                ts: bot_msg_ts,
-                channel: channel
-            },
-            channel: 'channel',
-            user: 'UTESTUSER',
-            reaction: '+1'
-        }
+      event: {
+        item: {
+          ts: bot_msg_ts,
+          channel: channel
+        },
+        channel: 'channel',
+        user: 'UTESTUSER',
+        reaction: '+1'
+      }
     }
   end
 
@@ -31,21 +31,20 @@ RSpec.describe ReactionAddedEventHandler do
   it 'ignores self-votes'
 
   it 'posts reaction on the recognition message' do
-
     params[:event][:item][:ts] = original_ts
 
     recognition.bot_msg_ts = bot_msg_ts
     recognition.save!
 
     expected = {
-        attachments: [
-            {
-                fallback: "foo has 1 points",
-                title: "foo has 1 points",
-                footer: ":thumbsup: by <@user>"
-            }
-        ],
-        channel: 'channel'
+      attachments: [
+        {
+          fallback: "foo has 1 points",
+          title: "foo has 1 points",
+          footer: ":thumbsup: by <@user>"
+        }
+      ],
+      channel: 'channel'
     }
     expect(Recognition.count).to eq 1
     expect(recognition.votes.size).to eq 1 # precondition
@@ -64,14 +63,14 @@ RSpec.describe ReactionAddedEventHandler do
     recognition.save!
 
     expected = {
-        attachments: [
-            {
-                fallback: "foo has 1 points",
-                title: "foo has 1 points",
-                footer: ":thumbsup: by <@user>"
-            }
-        ],
-        channel: 'channel'
+      attachments: [
+        {
+            fallback: "foo has 1 points",
+            title: "foo has 1 points",
+            footer: ":thumbsup: by <@user>"
+        }
+    ],
+      channel: 'channel'
     }
     expect(Recognition.count).to eq 1
     expect(recognition.votes.size).to eq 1 # precondition

@@ -4,7 +4,7 @@ RSpec.describe SlackUser, type: :model do
 
   context 'userid format validation' do
     let(:valid) { 'U42DESEA3' }
-    invalid = ['U', 'u', '42DESEA3 ']
+    invalid = %w(U u 42DESEA3 <@U42DESEA3>)
 
     it 'accepts valid userid' do
       subject.slack_userid = valid

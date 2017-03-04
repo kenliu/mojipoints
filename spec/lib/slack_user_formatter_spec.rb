@@ -7,9 +7,13 @@ RSpec.describe SlackUserFormatter do
     end
   end
 
-  describe '#extract' do
-    it 'extracts' do
-      expect(described_class.extract('<@USLACKBOT1>')).to eq 'USLACKBOT1'
+  describe '#unescape' do
+    it 'unescapes' do
+      expect(described_class.unescape('<@USLACKBOT1>')).to eq 'USLACKBOT1'
+    end
+
+    it 'passes through non-escaped string' do
+      expect(described_class.unescape('blah blah blah')).to eq 'blah blah blah'
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170226042828) do
+ActiveRecord::Schema.define(version: 20170304032332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170226042828) do
     t.string   "bot_msg_ts"
     t.string   "channel",                       null: false
     t.boolean  "vote_direction", default: true, null: false
+    t.boolean  "user_subject",   default: true
     t.index ["slack_user_id"], name: "index_recognitions_on_slack_user_id", using: :btree
     t.index ["subject"], name: "index_recognitions_on_subject", using: :btree
     t.index ["text"], name: "index_recognitions_on_text", using: :btree

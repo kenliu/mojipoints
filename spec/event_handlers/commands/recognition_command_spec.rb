@@ -88,6 +88,36 @@ RSpec.describe Commands::RecognitionCommand do
       expect(recognition.votes.first.first_vote).to be_truthy
     end
 
+    it 'upvotes a user with no reason' do
+      text = '<@UABCDEFG> ++'
+      subject.match(message: text)
+      params = {
+          event: {
+              channel: 'channel',
+              user: 'U123456',
+              ts: '123456.123456'
+          }
+      }
+      expected = {
+          attachments: [
+              {
+                  fallback: "<@UABCDEFG> has 1 points",
+                  title: "<@UABCDEFG> has 1 points",
+                  footer: ":thumbsup: by <@U123456>"
+              }
+          ],
+          channel: 'channel'
+      }
+      expect(Recognition.count).to eq 0 # precondition
+      expect(subject.response(message: nil, params: params)).to eq(expected)
+
+      # assert first voter
+      recognition = Recognition.first
+      expect(recognition).to be_truthy
+      expect(recognition.votes.size).to eq 1
+      expect(recognition.votes.first.first_vote).to be_truthy
+    end
+
     context 'self-upvotes' do
       it 'rejects self-upvotes' do
         text = '<@U123456> ++'
