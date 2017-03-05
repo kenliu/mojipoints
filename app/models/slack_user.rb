@@ -2,7 +2,7 @@ class SlackUser < ApplicationRecord
   USERID_REGEX = /\AU\w+\z/
   ESCAPED_USERID_REGEX = /\A<@(U\w+)>\z/
 
-  has_many :votes
+  has_many :votes, dependent: :destroy
 
   validates :slack_userid, presence: true
   validates :slack_userid, format: { with: SlackUser::USERID_REGEX, message: 'in wrong format' }

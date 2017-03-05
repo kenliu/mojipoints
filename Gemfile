@@ -17,6 +17,7 @@ gem 'rollbar'
 gem 'scout_apm'
 gem 'silencer', '~> 1.0'
 gem 'slack-ruby-client'
+gem 'thor-rails'
 
 group :development, :test do
   gem 'awesome_print'
