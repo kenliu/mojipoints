@@ -2,8 +2,7 @@ class RecognitionsService
   def self.create_recognition(teamid, channel, subject, vote_string, reason, voterid, ts, first_vote)
     direction = vote_direction(vote_string)
     point = direction ? Vote::UP : Vote::DOWN
-
-    is_user_subject = SlackUserFormatter.valid_userid?(SlackUserFormatter.unescape(subject))
+    is_user_subject = (SlackUserFormatter.unescape(subject)) == subject ? false : true
     recognition = Recognition.create!(
       channel: channel,
       subject: SlackUserFormatter.unescape(subject),

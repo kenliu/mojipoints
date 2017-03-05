@@ -4,25 +4,38 @@ RSpec.describe RecognitionsService do
   let(:voter) { 'U123456' }
 
   context '#create_recognition' do
-    it 'creates a recognition for an downvote' do
+    it 'for an downvote' do
       recognition = described_class.create_recognition('abc123', 'C123456', 'someone', '--', 'for doing something', voter, '123456.123456', true)
       expect(recognition.votes.first.point).to eq(-1)
     end
 
-    it 'creates a recognition for a downvote with emoji' do
+    it 'for a downvote with emoji' do
       recognition = described_class.create_recognition('abc123', 'C123456', 'someone', ':thumbsdown:', 'for doing something', voter, '123456.123456', true)
       expect(recognition.votes.first.point).to eq(-1)
     end
 
-    it 'creates a recognition for an upvote' do
+    it 'for an upvote' do
       recognition = described_class.create_recognition('abc123', 'C123456', 'someone', '++', 'for doing something', voter, '123456.123456', true)
       expect(recognition.votes.first.point).to eq(1)
     end
 
-    it 'creates a recognition for a downvote' do
+    it 'for a upvote where the subject starts with U' do
+      recognition = described_class.create_recognition('abc123', 'C123456', 'UstartswithU', '++', 'for doing something', voter, '123456.123456', true)
+      expect(recognition.subject).to eq('UstartswithU')
+      expect(recognition.user_subject).to eq false
+    end
+
+    it 'for a upvote where the subject is a user' do
+      recognition = described_class.create_recognition('abc123', 'C123456', '<@USOMEUSER>', '++', 'for doing something', voter, '123456.123456', true)
+      expect(recognition.subject).to eq('USOMEUSER')
+      expect(recognition.user_subject).to eq true
+    end
+
+    it 'for a downvote' do
       recognition = described_class.create_recognition('abc123', 'C123456', 'someone', '--', 'for doing something', voter, '123456.123456', true)
       expect(recognition.votes.first.point).to eq(-1)
       expect(recognition.vote_direction).to be false
+      expect(recognition.user_subject).to eq false
     end
   end
 
