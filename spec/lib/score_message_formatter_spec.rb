@@ -4,7 +4,7 @@ RSpec.describe ScoreMessageFormatter do
   describe '#format_slack_message' do
     let(:recognition) { RecognitionsService.create_recognition('123','c123', 'U123456', '++', 'test reason', 'U123456', '123456.12345', true) }
     let(:recognition_not_user) { RecognitionsService.create_recognition('123','c123', 'foobar', '++', nil, 'U123456', '123456.12345', true) }
-    let(:recognition_no_reason) { RecognitionsService.create_recognition('123','c123', 'U123456', '++', nil, 'U123456', '123456.12345', true) }
+    let(:recognition_no_reason) { RecognitionsService.create_recognition('123','c123', '<@U123456>', '++', nil, 'U123456', '123456.12345', true) }
 
     context 'formatting recognition message' do
       it 'with thing as subject and no reason' do
