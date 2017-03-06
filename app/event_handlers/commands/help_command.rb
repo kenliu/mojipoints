@@ -1,5 +1,5 @@
 module Commands
-  class WelcomeMessage < BaseCommand
+  class HelpCommand < BaseCommand
 
     def match(message:, channel:)
       direct_message(message, channel) == 'help'

@@ -30,11 +30,11 @@ class MessageEventHandler < BaseEventHandler
         channel: dm_channel,
         text: Commands::TopCommand.new(bot_user: bot_user).response(params: params)[:text]
       )
-    elsif Commands::WelcomeMessage.new(bot_user: bot_user).match(channel: source_channel, message: message)
+    elsif Commands::HelpCommand.new(bot_user: bot_user).match(channel: source_channel, message: message)
       slack_api.chat_postMessage(
         as_user: 'true',
         channel: source_channel,
-        text: Commands::WelcomeMessage.new(bot_user: bot_user).response(params: params)[:text]
+        text: Commands::HelpCommand.new(bot_user: bot_user).response(params: params)[:text]
       )
     elsif Commands::ScoreCommand.new(bot_user: bot_user).match(channel: source_channel, message: message)
       # FIXME this is ugly

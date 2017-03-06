@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Commands::WelcomeMessage do
+RSpec.describe Commands::HelpCommand do
   let(:public_channel) { 'C12345678' }
   let(:dm_channel) { 'D12345678' }
   let(:bot_user) { 'U12345678' }
