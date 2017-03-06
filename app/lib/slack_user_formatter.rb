@@ -4,6 +4,10 @@ class SlackUserFormatter
     match_data ? match_data[1] : formatted_string
   end
 
+  def self.escaped_userid?(string)
+    /\A<@U\w+>\z/.match(string) ? true : false
+  end
+
   def self.format(userid)
     "<@#{userid}>"
   end
