@@ -24,7 +24,7 @@ module Commands
       voterid = params[:event][:user]
       ts = params[:event][:ts]
 
-      if SelfRecognitionCheck.self_recognition?(voterid, @subject)
+      if voterid == SlackUserFormatter.unescape(@subject)
         @self_recognition = true
         # do nothing for now
         # in the future we will chastise the user for self voting

@@ -17,7 +17,7 @@ class ReactionAddedEventHandler < ReactionEventHandler
       return
     end
 
-    if SelfRecognitionCheck.self_recognition?(voterid, recognition.subject)
+    if voterid == recognition.subject
       # do nothing for now
       # in the future we will chastise the user for self voting
       Rails.logger.info("#{voterid} tried to self-vote")
