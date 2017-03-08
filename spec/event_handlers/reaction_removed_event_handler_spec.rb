@@ -39,6 +39,33 @@ RSpec.describe ReactionRemovedEventHandler do
 
   subject { described_class.new(initialize_params, slack_api) }
 
+  it 'ignores self-votes' do
+    params[:event][:item][:ts] = original_ts
+    params[:event][:user] = 'U123456'
+    recognition.bot_msg_ts = bot_msg_ts
+    recognition.save!
+
+    expected = {
+        attachments: [
+            {
+                fallback: "foo has 1 points",
+                title: "foo has 1 points",
+                footer: ":thumbsup: by <@user>"
+            }
+        ],
+        channel: 'channel'
+    }
+    expect(Recognition.count).to eq 1
+    expect(recognition.votes.size).to eq 1 # precondition
+
+    expect(slack_api).not_to receive(:chat_update)
+
+    subject.handle(params)
+
+    recognition = Recognition.first
+    expect(recognition.votes.size).to eq 1
+  end
+
   it 'removes reaction on the recognition message' do
     params[:event][:item][:ts] = original_ts
     recognition.bot_msg_ts = bot_msg_ts
