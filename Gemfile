@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.1'
 
 gem 'configatron'
 gem 'keen'
+gem 'newrelic_rpm'
 gem 'puma', '~> 3.0'
 gem 'pg'
 gem 'rollbar'
