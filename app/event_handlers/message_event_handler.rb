@@ -24,10 +24,9 @@ class MessageEventHandler < BaseEventHandler
         recognition_command.after_response(params, api_response)
       end
     elsif Commands::TopCommand.new(bot_user: bot_user).match(channel: source_channel, message: message)
-      dm_channel = SlackMessagingService.im_channel(team_id, user_id)
       slack_api.chat_postMessage(
         as_user: 'true',
-        channel: dm_channel,
+        channel: dm_channel(team_id, user_id),
         text: Commands::TopCommand.new(bot_user: bot_user).response(params: params)[:text]
       )
     elsif Commands::HelpCommand.new(bot_user: bot_user).match(channel: source_channel, message: message)
@@ -46,6 +45,18 @@ class MessageEventHandler < BaseEventHandler
         # FIXME this blows up if there is no data in the DB
         text: command.response(params: params)[:text]
       )
+    elsif Commands::PlusPlusCommand.new(bot_user: bot_user).match(channel: source_channel, message: message)
+      slack_api.chat_postMessage(
+          as_user: 'true',
+          channel: dm_channel(team_id, user_id),
+          text: Commands::PlusPlusCommand.new(bot_user: bot_user).response(params: params)[:text]
+      )
     end
+  end
+
+  private
+
+  def dm_channel(team_id, user_id)
+    SlackMessagingService.im_channel(team_id, user_id)
   end
 end
