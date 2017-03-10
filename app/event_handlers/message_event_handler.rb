@@ -51,6 +51,7 @@ class MessageEventHandler < BaseEventHandler
           channel: dm_channel(team_id, user_id),
           text: Commands::PlusPlusCommand.new(bot_user: bot_user).response(params: params)[:text]
       )
+      Keen.publish(:plusplus, { user_id: user_id })
     end
   end
 
