@@ -15,6 +15,16 @@ class ScoreMessageFormatter
     attachment
   end
 
+  def self.format_slack_message_compact(recognition)
+    reason = recognition.text
+    subject = recognition.subject
+
+    message = recognition.user_subject ? user_has_total_points(subject) : subject_has_total_points(subject)
+
+    message += ' ' + points_for_reason(subject, reason) if reason
+    message
+  end
+
   def self.points_for_reason(subject, reason)
     # TODO deal with pluralization
     "#{PointsService.points_for_reason(subject, reason).to_s} of which are for #{reason}"

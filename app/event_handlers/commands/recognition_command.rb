@@ -42,9 +42,18 @@ module Commands
           ts,
           true
         )
-        attachment = ScoreMessageFormatter.format_slack_message(@recognition)
+        text = ScoreMessageFormatter.format_slack_message_compact(@recognition)
+
+        #
+        # attachment = {
+        #     fallback: message,
+        #     title: message,
+        #     # TODO not sure if this should include all voters for all time
+        #     footer: "#{voters(recognition)}"
+        # }
+
         {
-          attachments: [attachment],
+          text: text,
           channel: channel
         }
       end

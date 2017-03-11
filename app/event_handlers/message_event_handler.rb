@@ -18,7 +18,7 @@ class MessageEventHandler < BaseEventHandler
         api_response = slack_api.chat_postMessage(
           as_user: 'true',
           channel: command_response[:channel],
-          attachments: command_response[:attachments]
+          text: command_response[:text]
         )
         Rails.logger.info("posted bot message #{api_response[:ts]}")
         recognition_command.after_response(params, api_response)
