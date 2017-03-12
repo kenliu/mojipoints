@@ -52,6 +52,12 @@ class MessageEventHandler < BaseEventHandler
           text: Commands::PlusPlusCommand.new(bot_user: bot_user).response(params: params)[:text]
       )
       Keen.publish(:plusplus, { user_id: user_id })
+    elsif Commands::ScrubCommand.new(teamid: team_id, bot_user: bot_user).match(channel: source_channel, message: message)
+      slack_api.chat_postMessage(
+          as_user: 'true',
+          channel: dm_channel(team_id, user_id),
+          text: Commands::ScrubCommand.new(teamid: team_id, bot_user: bot_user).response(params: params, message: message)[:text]
+      )
     end
   end
 
