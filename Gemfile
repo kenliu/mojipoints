@@ -7,7 +7,7 @@ end
 
 ruby '2.3.3'
 
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.0.2'
 
 gem 'configatron'
 gem 'keen'
