@@ -16,18 +16,19 @@ class ScoreMessageFormatter
   end
 
   def self.points_for_reason(subject, reason)
-    # TODO deal with pluralization
-    "#{PointsService.points_for_reason(subject, reason).to_s} of which are for #{reason}"
+    "#{PointsService.points_for_reason(subject, reason)} of which are for #{reason}"
   end
 
   def self.user_has_total_points(subject)
-    # TODO deal with pluralization
-    "#{SlackUserFormatter.format(subject)} has #{PointsService.total_points(subject)} points"
+    total_points = PointsService.total_points(subject)
+    points_string = 'point'.pluralize(total_points)
+    "#{SlackUserFormatter.format(subject)} has #{total_points} #{points_string}"
   end
 
   def self.subject_has_total_points(subject)
-    # TODO deal with pluralization
-    "#{subject} has #{PointsService.total_points(subject)} points"
+    total_points = PointsService.total_points(subject)
+    points_string = 'point'.pluralize(total_points)
+    "#{subject} has #{total_points} #{points_string}"
   end
 
   def self.voters(recognition)

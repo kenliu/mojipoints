@@ -71,8 +71,8 @@ RSpec.describe Commands::RecognitionCommand do
       expected = {
         attachments: [
           {
-            fallback: "foo has 1 points",
-            title: "foo has 1 points",
+            fallback: "foo has 1 point",
+            title: "foo has 1 point",
             footer: ":thumbsup: by <@U123456>"
           }
         ],
@@ -101,8 +101,8 @@ RSpec.describe Commands::RecognitionCommand do
       expected = {
           attachments: [
               {
-                  fallback: "<@UABCDEFG> has 1 points",
-                  title: "<@UABCDEFG> has 1 points",
+                  fallback: "<@UABCDEFG> has 1 point",
+                  title: "<@UABCDEFG> has 1 point",
                   footer: ":thumbsup: by <@UVOTER>"
               }
           ],
