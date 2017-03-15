@@ -1,10 +1,11 @@
 module Commands
   class BaseCommand
 
-    attr_reader :bot_user
+    attr_reader :bot_user, :teamid
 
-    def initialize(bot_user:)
+    def initialize(teamid: nil, bot_user:)
       @bot_user = bot_user
+      @teamid = teamid
     end
 
     def direct_message(text, channel)

@@ -8,7 +8,7 @@ class MessageEventHandler < BaseEventHandler
     message = params[:event][:text]
     message = params[:event][:message][:text] unless message # message events can come in with two different structures
 
-    recognition_command = Commands::RecognitionCommand.new(params)
+    recognition_command = Commands::RecognitionCommand.new(bot_user: bot_user, teamid: team_id)
     source_channel = params[:event][:channel]
     if recognition_command.match(message: message)
       command_response = recognition_command.response(message: message, params: params)

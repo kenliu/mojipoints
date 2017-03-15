@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Commands::RecognitionCommand do
 
   let(:team_id) { 'team123' }
-  subject { described_class.new(team_id: team_id) }
+  let(:bot_user) { 'UBOTUSER' }
+  subject { described_class.new(teamid: team_id, bot_user: bot_user) }
 
   describe '#match' do
     context 'valid upvotes and downvotes' do
@@ -131,6 +132,39 @@ RSpec.describe Commands::RecognitionCommand do
         }
         expect(subject.response(message: nil, params: params)).to be_nil
       end
+    end
+  end
+
+  context '#after_response' do
+    let(:api) { double('slack_api') }
+    before do
+      text = '<@UABCDEFG> ++'
+      subject.match(message: text)
+      params = {
+          event: {
+              channel: 'channel',
+              user: 'UVOTER',
+              ts: '123456.123456'
+          }
+      }
+      expected = {
+          attachments: [
+              {
+                  fallback: "<@UABCDEFG> has 1 point",
+                  title: "<@UABCDEFG> has 1 point",
+                  footer: ":thumbsup: by <@UVOTER>"
+              }
+          ],
+          channel: 'channel'
+      }
+      expect(Recognition.count).to eq 0 # precondition
+      expect(subject.response(message: nil, params: params)).to eq(expected)
+    end
+
+    it 'posts a heavy plus reaction for an upvote' do
+      subject.api = api
+      expect(api).to receive(:reactions_add).with(name: "heavy_plus_sign", channel: "channel", timestamp: "12345.12345")
+      subject.after_response(nil, {ts: '12345.12345'})
     end
   end
 end

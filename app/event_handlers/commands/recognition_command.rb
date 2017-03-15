@@ -1,13 +1,10 @@
 module Commands
-  class RecognitionCommand
-    attr_reader :subject, :vote_string, :reason, :team_id
+  class RecognitionCommand < BaseCommand
+    attr_reader :subject, :vote_string, :reason, :teamid
+    attr_accessor :api
 
     # TODO DRY the vote strings with the recognition service class
     EMOJI_STRINGS = %w(:thumbsup: :heavy_plus_sign: :thumbsdown: :heavy_minus_sign:).freeze
-
-    def initialize(params)
-      @team_id = params[:team_id]
-    end
 
     def match(message:)
       match_data = /^([\s\w'@.:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0<>]+)\s*(\+{2}|-{2}|#{EMOJI_STRINGS.join('|')})( for (.+$))?$/.match(message)
@@ -21,6 +18,7 @@ module Commands
 
     def response(message:, params:)
       channel = params[:event][:channel]
+      @channel = channel
       voterid = params[:event][:user]
       ts = params[:event][:ts]
 
@@ -33,7 +31,7 @@ module Commands
       else
         @self_recognition = false
         @recognition = RecognitionsService.create_recognition(
-          team_id,
+          teamid,
           channel,
           @subject,
           @vote_string,
@@ -51,7 +49,16 @@ module Commands
     end
 
     def after_response(_, api_response)
-      @recognition.update(bot_msg_ts: api_response[:ts]) unless @self_recognition
+      unless @self_recognition
+        bot_msg_ts = api_response[:ts]
+        @recognition.update(bot_msg_ts: bot_msg_ts)
+        emoji = @recognition.vote_direction? ? 'heavy_plus_sign' : 'heavy_minus_sign'
+        api.reactions_add(name: emoji, channel: @channel, timestamp: bot_msg_ts)
+      end
+    end
+
+    def api
+      @api ||= SlackApiService.create_slack_client(teamid)
     end
   end
 end
