@@ -13,12 +13,13 @@ RSpec.describe Commands::ScrubCommand do
   let(:original_ts) { '123456.12345' }
   let(:channel) { 'C123456' }
   let(:subject_user) { 'U123456' }
+  let(:recognition_subject) { 'foo' }
   let(:voter) { 'U111111' }
   let!(:recognition) {
     RecognitionsService.create_recognition(
       teamid,
       channel,
-      subject_user,
+      recognition_subject,
       '++',
       'test reason',
       voter,
@@ -27,7 +28,7 @@ RSpec.describe Commands::ScrubCommand do
     )
   }
 
-  subject { described_class.new(bot_user: bot_user) }
+  subject { described_class.new(teamid: teamid, bot_user: bot_user) }
 
   describe '#match' do
     it 'matches "scrub" in DM channel' do
@@ -44,9 +45,9 @@ RSpec.describe Commands::ScrubCommand do
   end
 
   describe '#response' do
-
     it 'responds' do
-      expect(subject.match(channel: public_channel, message: 'scrub foo')).to be_falsey
+      subject.response(params: nil, message: 'scrub ' + recognition_subject)
+      expect(Recognition.count).to eq 0
     end
   end
 end
