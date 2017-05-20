@@ -8,7 +8,7 @@ RSpec.describe Commands::RecognitionCommand do
 
   describe '#match' do
     context 'valid upvotes and downvotes' do
-      vote_strings = %w(++ :thumbsup: :heavy_plus_sign: :thumbsdown: :heavy_minus_sign:)
+      vote_strings = %w(++ :heavy_plus_sign: :heavy_minus_sign:)
 
       vote_strings.each do |votestring|
         it "votes with with no reason using #{votestring}" do

@@ -4,7 +4,7 @@ module Commands
     attr_accessor :api
 
     # TODO DRY the vote strings with the recognition service class
-    EMOJI_STRINGS = %w(:thumbsup: :heavy_plus_sign: :thumbsdown: :heavy_minus_sign:).freeze
+    EMOJI_STRINGS = %w(:heavy_plus_sign: :heavy_minus_sign:).freeze
 
     def match(message:)
       match_data = /^([\s\w'@.:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0<>]+)\s*(\+{2}|-{2}|#{EMOJI_STRINGS.join('|')})( for (.+$))?$/.match(message)
