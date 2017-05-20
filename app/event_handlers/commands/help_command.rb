@@ -20,13 +20,13 @@ module Commands
 \`#{bot_name} help\` : show this message
 
 *How to upvote*
-\`@user++\` or \`@user`:thumbsup: or \`@user`:heavy_plus_sign: : upvote a user
+\`@user++\` or \`@user`:heavy_plus_sign: : upvote a user
 \`@user++ for something\` : upvote a user with a reason
 \`thing++` : upvote a thing
 Add a reaction to keep voting up!
 
 *How to downvote*
-\`@user--\` or \`@user`:thumbsdown: or \`@user`:heavy_minus_sign: : downvote a user
+\`@user--\` or \`@user`:heavy_minus_sign: : downvote a user
 \`@user-- for something\` : downvote a user with a reason
 \`thing--` : downvote a thing
 Add a reaction to keep voting down!
