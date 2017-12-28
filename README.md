@@ -2,11 +2,16 @@
 
 ## Building the application
 
+TBD
+
+## Create an app in Heroku
+
+TBD
 
 ## Configure the app in Slack
 
-1. Sign in to your slack team and go to `https://api.slack.com`
-1. Create a new app
+1. Sign in to your Slack team and go to `https://api.slack.com/apps`
+1. Click the green `Create an App` button
 1. Set `SLACK_CLIENT_ID` and `SLACK_API_SECRET` env variables in the Heroku app config using the generated values from Slack
 1. Upload the app icon from `icon.png`
 1. Set the app name (usually `mojipoints` but this is already taken)
