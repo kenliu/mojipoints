@@ -12,29 +12,34 @@ TBD
 
 1. Sign in to your Slack team and go to `https://api.slack.com/apps`
 1. Click the green `Create an App` button
-1. Set `SLACK_CLIENT_ID` and `SLACK_API_SECRET` env variables in the Heroku app config using the generated values from Slack
-1. Upload the app icon from `icon.png`
-1. Set the app name (usually `mojipoints` but this is already taken)
-1. Set the "Short Description" to `Give your coworkers points using emojis!`
-1. Click `Save Changes`
-1. OAuth & Permissions -> Set `Redirect URL(s)` to `https://<Heroku app URL>/auth/finish` (click `Save Changes`)
-1. Make sure the application is up and running
-1. Bot Users -> add a Bot user. set default username to `@mojipoints`
-1. Enable `Always Show My Bot as Online`
-1. Click `Add Bot User` then `Save Changes`
-1. Go back to Basic Information. Set the given `verification token` as `SLACK_VERIFICATION_TOKEN` env variable in the Heroku app
-1. Event Subscriptions -> Enable Events
-1. Set the `Request URL` field to the event endpoint URL `https://<Heroku app URL>/events`. The server must be up and
+1. Set "Display Information"
+    1. Set the "App name" (usually `mojipoints` but this is already taken)
+    1. Set the "Short description" to `Give your coworkers points using emojis!`
+    1. Upload the app icon from `icon.png` in the git repo
+    1. Set "Background Color" to `#177300` or thereabouts
+1. Click `Save Changes` (bottom right)
+1. OAuth & Permissions -> Set `Redirect URLs` to `https://<Heroku app URL>/auth/finish` (click `Save URLs`)
+1. Under `Basic Information` -> `App Credentials` you will find a "Client ID" and "Client Secret". Set `SLACK_CLIENT_ID` and `SLACK_API_SECRET` env variables in the Heroku app config using the generated values from Slack
+1. Set the given `verification token` as `SLACK_VERIFICATION_TOKEN` env variable in the Heroku app config
+1. Make sure the application is up and running on Heroku
+1. Setup a bot user. Select "Bot Users"
+   1. Click `Add a Bot User`.
+   1. Set "Display name" to `mojipoints`
+   1. Set "Default username" to `mojipoints`
+   1. Enable `Always Show My Bot as Online`
+   1. Click `Add Bot User`
+1. Event Subscriptions
+   1. Enable "Enable Events" toggle
+   1. Set the `Request URL` field to the event endpoint URL `https://<Heroku app URL>/events`. The server must be up and
  running so that Slack can verify the URL. (It should display `Verified` successfully if everything is set up right on the server.)
-1. Add the following Bot Events:
-    * `message.channels`
-    * `message.groups`
-    * `message.im`
-    * `message.mpim`
-    * `reaction_added`
-    * `reaction_removed`
-1. Don't forget to click `Save Changes`!
-
+   1. Add the following Bot Events:
+       * `message.channels`
+       * `message.groups`
+       * `message.im`
+       * `message.mpim`
+       * `reaction_added`
+       * `reaction_removed`
+   1. Don't forget to click `Save Changes`!
 
 ## Credits
 
