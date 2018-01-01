@@ -40,6 +40,7 @@ TBD
        * `reaction_added`
        * `reaction_removed`
    1. Don't forget to click `Save Changes`!
+1. Go back to "Basic Information" and select "Install your app to your workspace" and click "Install App to Workspace"
 
 ## Credits
 
