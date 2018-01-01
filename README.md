@@ -43,6 +43,7 @@ TBD
 1. Install the new app
    1. Go back to "Basic Information" and select "Install your app to your workspace" and click "Install App to Workspace"
    1. On the next screen, click "Authorize"
+   1. Browse to `https://<Heroku app URL>/auth/begin` to install the app
 
 ## Credits
 
