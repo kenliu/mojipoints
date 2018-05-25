@@ -1,14 +1,16 @@
-# README
+[![Maintainability](https://api.codeclimate.com/v1/badges/c7ad8694e06589422064/maintainability)](https://codeclimate.com/github/kenliu/mojipoints/maintainability)
 
-## Building the application
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c7ad8694e06589422064/test_coverage)](https://codeclimate.com/github/kenliu/mojipoints/test_coverage)
 
-TBD
-
-## Create an app in Heroku
+# Building the application
 
 TBD
 
-## Configure the app in Slack
+# Create an app in Heroku
+
+TBD
+
+# Configure the app in Slack
 
 1. Sign in to your Slack team and go to `https://api.slack.com/apps`
 1. Click the green `Create an App` button
@@ -45,6 +47,6 @@ TBD
    1. On the next screen, click "Authorize"
    1. Browse to `https://<Heroku app URL>/auth/begin` and click to button to install the app
 
-## Credits
+# Credits
 
 App Icon made by <a href="http://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
