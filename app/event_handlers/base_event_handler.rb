@@ -1,3 +1,4 @@
+# Base class for all event handlers
 class BaseEventHandler
 
   attr_reader :team_id

@@ -1,3 +1,4 @@
+# Base class for handling reaction events.
 class ReactionEventHandler < BaseEventHandler
   def post_recognition(channel, emoji, recognition, voterid, first_vote, flip_vote_direction)
     RecognitionsService.vote(team_id, recognition, voterid, emoji, first_vote, flip_vote_direction)

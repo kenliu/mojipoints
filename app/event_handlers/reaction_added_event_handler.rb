@@ -1,3 +1,6 @@
+# Handles all Slack "reaction_added" events.
+#
+# adding a reaction increments the score for a subject
 class ReactionAddedEventHandler < ReactionEventHandler
   def handle(params)
     user_id = params[:event][:user]

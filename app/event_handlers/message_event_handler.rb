@@ -1,3 +1,4 @@
+# handles all Slack API "message" events, delegating to Command objects depending on matched messages
 class MessageEventHandler < BaseEventHandler
   def handle(params)
     # Don't process messages sent from our bot user

@@ -1,3 +1,6 @@
+# Users familiar with older karma bots might use "++" to add points instead of emojis,
+# This educates them on how to use emojis.
+#
 module Commands
   class PlusPlusCommand < BaseCommand
     def match(message:, channel:)
