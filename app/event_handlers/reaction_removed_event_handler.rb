@@ -1,6 +1,6 @@
 # Handles all Slack "reaction_removed" events.
 #
-# removing a reaction decrements the score for a subject.
+# Removing a reaction decrements the score for a subject.
 class ReactionRemovedEventHandler < ReactionEventHandler
   def handle(params)
     user_id = params[:event][:user]

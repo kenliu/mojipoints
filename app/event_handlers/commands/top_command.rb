@@ -5,7 +5,6 @@ module Commands
     end
 
     def response(params:)
-
       text = PointsService.top_recognitions_report
                  .map { |subject, score| format_line(subject, score) }
                  .join("\n")
