@@ -24,8 +24,9 @@ RSpec.describe Commands::TopCommand do
 
   describe '#response' do
     it 'responds' do
-
-      #TODO finish this
+      # TODO here we have to populate the database with some test data so that we can
+      # generate a response
+      # or we inject a mock PointsService instead
       expect(subject.response(params: nil)[:text]).to start_with("")
     end
   end

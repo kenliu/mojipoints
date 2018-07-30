@@ -166,5 +166,9 @@ RSpec.describe Commands::RecognitionCommand do
       expect(api).to receive(:reactions_add).with(name: "heavy_plus_sign", channel: "channel", timestamp: "12345.12345")
       subject.after_response(nil, {ts: '12345.12345'})
     end
+
+    it 'responds to an upvote in a thread' do
+      
+    end
   end
 end
