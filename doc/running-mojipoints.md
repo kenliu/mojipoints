@@ -7,7 +7,6 @@ Although mojipoints is generally environment agnostic, it was developed with Her
 * Heroku Postgres (Hobby Dev)
  
 Recommended Heroku add-ons:
-* Heroku Postgres
 * New Relic APM
 * Papertrail
 * Keen
