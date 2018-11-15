@@ -2,6 +2,8 @@
 
 Mojipoints was designed to be a karma bot with a Slack-native UX. In addition to the traditional `++` method of giving karma, mojipoints uses Slack emojis for giving recognitions (or taking them away!).
 
+![mojipoints demo](/public/mojipoints-demo-480.gif)
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/c7ad8694e06589422064/maintainability)](https://codeclimate.com/github/kenliu/mojipoints/maintainability)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c7ad8694e06589422064/test_coverage)](https://codeclimate.com/github/kenliu/mojipoints/test_coverage)
